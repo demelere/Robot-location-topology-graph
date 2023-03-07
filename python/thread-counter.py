@@ -39,8 +39,8 @@ def max_threads_running_all(data):
 def max_threads_running_time(data, start_time, end_time):
     max_threads = 0
     for program_id, threads in data.items():
-
         threads.sort(key=lambda x: x[1])  
+
         active_threads = []
         for thread in threads:
             thread_id, thread_start, thread_end = thread
@@ -51,10 +51,12 @@ def max_threads_running_time(data, start_time, end_time):
             if thread_start >= end_time:
                 break
 
-            # if the thread starts before the given time range, remove threads that end before the given time range
+            # remove threads that have ended before the start of the current thread
             while active_threads and active_threads[0][2] <= thread_start:
                 active_threads.pop(0)
-            active_threads.append(thread) # and add the current thread to the list of active threads
+
+            # add the current thread to the list of active threads and update max_threads if necessary
+            active_threads.append(thread)
             max_threads = max(max_threads, len(active_threads)) 
 
     return max_threads
