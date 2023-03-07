@@ -16,7 +16,6 @@ for filename in os.listdir(data_directory):
                     data[program_id] = []
                 data[program_id].append((thread_id, start_time, end_time))
 
-# gets the max possible number of threads running at any one time across all program ids
 def max_threads_running_all(data):
     # create a multiple line function description
     max_threads = 0
@@ -37,14 +36,6 @@ def max_threads_running_all(data):
 
     return max_threads
 
-def max_threads_running_all_2(data):
-    max_threads = 0
-    for program_id, threads in data.items():
-        num_threads = len(set([thread[0] for thread in threads]))
-        max_threads = max(max_threads, num_threads)
-    return max_threads
-
-# gets the max possible number of threads running for all program ids during a given time range
 def max_threads_running_time(data, start_time, end_time):
     max_threads = 0
     for program_id, threads in data.items():
@@ -68,7 +59,6 @@ def max_threads_running_time(data, start_time, end_time):
 
     return max_threads
 
-# gets the max possible number of threads running at any one time under a given program id
 def max_threads_running_program(data, program_id):
     max_threads = 0
     if program_id in data:
