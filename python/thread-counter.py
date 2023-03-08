@@ -18,7 +18,7 @@ for filename in os.listdir(data_directory):
 
 def max_threads_running_all(data):
     max_threads = 0
-    for program_id, program_data in data.items():
+    for program_id, program_data in data.items(): # iterates over all program ids
 
         # makes a list of thread events (start and end times)
         thread_events = []         
@@ -62,7 +62,7 @@ def max_threads_running_time(data, start_time, end_time):
 
 def max_threads_running_program(data, program_id):
     max_threads = 0
-    if program_id in data:
+    if program_id in data: # only considers the thread events for a certain program id and updates threads_running and max_thread for events for that program id
         
         thread_events = [] 
         for thread_id, start_time, end_time in data[program_id]:
@@ -77,6 +77,6 @@ def max_threads_running_program(data, program_id):
 
     return max_threads
 
-print(f'the max number of threads running at any time for all programs is: {max_threads_running_all(data)}') # expected 4
+print(f'the max number of threads running at any time for all programs is: {max_threads_running_all(data)}') # expected 3
 print(f'the max number of threads running for all programs between time 3 and 6 is: {max_threads_running_time(data, 3, 6)}') # expect 4
-print(f'the max number of threads running at any time for program 2 is: {max_threads_running_program(data, 2)}')
+print(f'the max number of threads running at any time for program 2 is: {max_threads_running_program(data, 2)}') # expected 3
